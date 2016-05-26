@@ -1,7 +1,7 @@
 defmodule BookApp.Repo do
 
   def all(BookApp.User) do
-    [%BookApp.User{id: "1", name: "Lucian", username: "lucian", password: "elixir"}]
+    [%BookApp.User{id: "1", name: "Lucian Leustean", username: "lucian", password: "elixir"}]
   end
 
   def all(_module), do: []
