@@ -23,6 +23,9 @@ config :logger, :console,
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
 
+# Configure Ecto repo
+config :book_app, ecto_repos: [BookApp.Repo]
+
 # Configure phoenix generators
 config :phoenix, :generators,
   migration: true,
