@@ -10,7 +10,7 @@ defmodule BookApp do
       # Start the endpoint when the application starts
       supervisor(BookApp.Endpoint, []),
       # Start the Ecto repository
-      # supervisor(BookApp.Repo, []),
+      supervisor(BookApp.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(BookApp.Worker, [arg1, arg2, arg3]),
     ]
