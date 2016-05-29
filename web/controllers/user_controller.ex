@@ -1,16 +1,13 @@
 defmodule BookApp.UserController do
   use BookApp.Web, :controller
 
+  plug :authenticate when action in [:index, :show]
+
   alias BookApp.User
 
   def index(conn, _params) do
-    case authenticate(conn) do
-      %Plug.Conn{halted: true} = conn ->
-        conn
-      conn ->
-        users = Repo.all(User)
-        render conn, "index.html", users: users
-    end
+    users = Repo.all(User)
+    render conn, "index.html", users: users
   end
 
   def show(conn, %{"id" => id}) do
@@ -36,7 +33,7 @@ defmodule BookApp.UserController do
     end
   end
 
-  defp authenticate(conn) do
+  defp authenticate(conn, _opts) do
     if conn.assigns.current_user do
       conn
     else
