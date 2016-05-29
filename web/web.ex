@@ -31,11 +31,13 @@ defmodule BookApp.Web do
       use Phoenix.Controller
 
       alias BookApp.Repo
+      alias BookApp.User
       import Ecto
       import Ecto.Query, only: [from: 1, from: 2]
 
       import BookApp.Router.Helpers
       import BookApp.Gettext
+      import BookApp.Auth, only: [authenticate_user: 2]
     end
   end
 
@@ -58,6 +60,8 @@ defmodule BookApp.Web do
   def router do
     quote do
       use Phoenix.Router
+
+      import BookApp.Auth, only: [authenticate_user: 2]
     end
   end
 
