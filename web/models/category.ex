@@ -1,18 +1,14 @@
-defmodule BookApp.Video do
+defmodule BookApp.Category do
   use BookApp.Web, :model
 
-  schema "videos" do
-    field :url, :string
-    field :title, :string
-    field :description, :string
-    belongs_to :user, BookApp.User
-    belongs_to :category, BookApp.Category
+  schema "categories" do
+    field :name, :string
 
     timestamps
   end
 
-  @required_fields ~w(url title description)
-  @optional_fields ~w(category_id)
+  @required_fields ~w(name)
+  @optional_fields ~w()
 
   @doc """
   Creates a changeset based on the `model` and `params`.
