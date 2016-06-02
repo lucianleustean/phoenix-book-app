@@ -26,6 +26,7 @@ defmodule BookApp.ConnCase do
       import Ecto.Query, only: [from: 1, from: 2]
 
       import BookApp.Router.Helpers
+      import BookApp.TestHelpers
 
       # The default endpoint for testing
       @endpoint BookApp.Endpoint
@@ -33,10 +34,7 @@ defmodule BookApp.ConnCase do
   end
 
   setup tags do
-    unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(BookApp.Repo, [])
-    end
-
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(BookApp.Repo)
     {:ok, conn: Phoenix.ConnTest.conn()}
   end
 end
