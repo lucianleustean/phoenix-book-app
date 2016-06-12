@@ -1,11 +1,15 @@
 defmodule BookApp.VideoViewTest do
   import Phoenix.View
+  import BookApp.Factories
 
   use BookApp.ConnCase
 
-  test "renders index.html", %{conn: conn} do
-    videos = [%BookApp.Video{id: "1", title: "dogs"},
-              %BookApp.Video{id: "2", title: "cats"}]
+  setup %{conn: conn} do
+    videos = [create(:video, title: "dogs"), create(:video, title: "cats")]
+    {:ok, conn: conn, videos: videos}
+  end
+
+  test "renders index.html", %{conn: conn, videos: videos} do
     content = render_to_string(BookApp.VideoView, "index.html",
                                conn: conn, videos: videos)
 

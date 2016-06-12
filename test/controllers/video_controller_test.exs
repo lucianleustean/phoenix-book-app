@@ -3,12 +3,14 @@ defmodule BookApp.VideoControllerTest do
 
   use BookApp.ConnCase
 
+  import BookApp.Factories
+
   @valid_attrs %{url: "http://example.com", title: "vid", description: "a vid"}
   @invalid_attrs %{title: "invalid"}
 
   setup %{conn: conn} = config do
     if config[:login_as] do
-      user = insert_user(username: "max")
+      user = create(:user, username: "max")
       conn = assign(conn(), :current_user, user)
       {:ok, conn: conn, user: user}
     else
@@ -60,7 +62,7 @@ defmodule BookApp.VideoControllerTest do
   @tag login_as: "max"
   test "authorizes actions against access by other users", %{user: owner, conn: conn} do
     video = insert_video(owner, @valid_attrs)
-    non_owner = insert_user(username: "sneaky")
+    non_owner = create(:user, username: "sneaky")
     conn = assign(conn, :current_user, non_owner)
 
     assert_error_sent :not_found, fn ->
