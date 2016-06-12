@@ -32,7 +32,6 @@ defmodule BookApp.Video do
 
   defp slugify_title(changeset) do
     if title = get_change(changeset, :title) do
-      IO.inspect title
       put_change(changeset, :slug, slugify(title))
     else
       changeset
@@ -40,7 +39,7 @@ defmodule BookApp.Video do
   end
 
   defp slugify(str) do
-    IO.inspect str
+    str
     |> String.downcase()
     |> String.replace(~r/[^\w-]+/, "-")
   end
