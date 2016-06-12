@@ -22,12 +22,15 @@ defmodule BookApp.ModelCase do
       import Ecto.Changeset
       import Ecto.Query, only: [from: 1, from: 2]
       import BookApp.ModelCase
+      import BookApp.TestHelpers
     end
   end
 
   setup tags do
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(BookApp.Repo)
+
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(BookApp.Repo, [])
+      Ecto.Adapters.SQL.Sandbox.mode(BookApp.Repo, {:shared, self()})
     end
 
     :ok
