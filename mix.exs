@@ -38,7 +38,8 @@ defmodule BookApp.Mixfile do
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
      {:phoenix_haml, "~> 0.2.1"},
-     {:comeonin, "~> 2.3"}]
+     {:comeonin, "~> 2.3"},
+     {:mix_test_watch, "~> 0.2", only: :dev}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
