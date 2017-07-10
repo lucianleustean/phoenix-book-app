@@ -30,17 +30,17 @@ defmodule BookApp.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.1.4"},
-     {:postgrex, ">= 0.0.0"},
-     {:phoenix_ecto, "~> 3.0.0-beta"},
-     {:phoenix_html, "~> 2.4"},
+    [{:phoenix, "~> 1.2.0"},
+     {:postgrex, "~> 0.13.3"},
+     {:phoenix_ecto, "~> 3.2.3"},
+     {:phoenix_html, "~> 2.9.3"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.9"},
-     {:cowboy, "~> 1.0"},
-     {:phoenix_haml, "~> 0.2.1"},
-     {:comeonin, "~> 2.3"},
-     {:mix_test_watch, "~> 0.2", only: :dev},
-     {:ex_machina, "~> 0.6.1", only: :test}]
+     {:gettext, "~> 0.13"},
+     {:cowboy, "~> 1.1.2"},
+     {:phoenix_haml, "~> 0.2"},
+     {:comeonin, "~> 3.2.0"},
+     {:mix_test_watch, "~> 0.4.1", only: :dev},
+     {:ex_machina, "~> 2.0.0", only: :test}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
