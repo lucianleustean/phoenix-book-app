@@ -25,8 +25,7 @@ defmodule BookApp.ViewTest do
   test "registration_changeset password must be at least 6 chars long" do
     attrs = Map.put(@valid_attrs, :password, "no")
     changeset = User.registration_changeset(%User{}, attrs)
-    assert {:password, {"should be at least %{count} character(s)", count: 6}}
-           in changeset.errors
+    assert "should be at least 6 character(s)" in errors_on(changeset).password
   end
 
   test "registration_changeset with valid attributes hashes_password" do

@@ -35,6 +35,11 @@ defmodule BookApp.ConnCase do
 
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(BookApp.Repo)
-    {:ok, conn: Phoenix.ConnTest.conn()}
+
+    unless tags[:async] do
+      Ecto.Adapters.SQL.Sandbox.mode(BookApp.Repo, {:shared, self()})
+    end
+
+    {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

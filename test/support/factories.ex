@@ -5,17 +5,17 @@ defmodule BookApp.Factories do
   alias BookApp.Video
   alias BookApp.Category
 
-  def factory(:user) do
+  def user_factory do
     %User{
       username: "max"
     }
   end
 
-  def factory(:video) do
+  def video_factory do
     %Video{}
   end
 
-  def factory(:category) do
+  def category_factory do
     %Category{}
   end
 end

@@ -11,11 +11,8 @@ defmodule BookApp.Video do
     belongs_to :user, BookApp.User
     belongs_to :category, BookApp.Category
 
-    timestamps
+    timestamps()
   end
-
-  @required_fields ~w(url title description)
-  @optional_fields ~w(category_id)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -23,9 +20,10 @@ defmodule BookApp.Video do
   If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
-  def changeset(model, params \\ :empty) do
+  def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, ~w(url title description category_id))
+    |> validate_required(~w(url title description)a)
     |> slugify_title()
     |> assoc_constraint(:category)
   end

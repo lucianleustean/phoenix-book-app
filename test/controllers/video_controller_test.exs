@@ -10,8 +10,8 @@ defmodule BookApp.VideoControllerTest do
 
   setup %{conn: conn} = config do
     if config[:login_as] do
-      user = create(:user, username: "max")
-      conn = assign(conn(), :current_user, user)
+      user = insert(:user, username: "max")
+      conn = assign(Phoenix.ConnTest.build_conn(), :current_user, user)
       {:ok, conn: conn, user: user}
     else
       :ok
@@ -36,7 +36,7 @@ defmodule BookApp.VideoControllerTest do
   @tag login_as: "max"
   test "list all user's videos on index", %{conn: conn, user: user} do
     user_video  = insert_video(user, title: "Elixir screencasts")
-    other_video = insert_video(insert_user(username: "other"), title: "another video")
+    other_video = insert_video(insert(:user, username: "other"), title: "another video")
 
     conn = get conn, video_path(conn, :index)
     assert html_response(conn, 200) =~ ~r/Listing videos/
@@ -62,7 +62,7 @@ defmodule BookApp.VideoControllerTest do
   @tag login_as: "max"
   test "authorizes actions against access by other users", %{user: owner, conn: conn} do
     video = insert_video(owner, @valid_attrs)
-    non_owner = create(:user, username: "sneaky")
+    non_owner = insert(:user, username: "sneaky")
     conn = assign(conn, :current_user, non_owner)
 
     assert_error_sent :not_found, fn ->
