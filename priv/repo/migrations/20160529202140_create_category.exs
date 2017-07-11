@@ -5,7 +5,7 @@ defmodule BookApp.Repo.Migrations.CreateCategory do
     create table(:categories) do
       add :name, :string, null: false
 
-      timestamps
+      timestamps()
     end
 
     create unique_index(:categories, [:name])
