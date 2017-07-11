@@ -9,8 +9,8 @@ defmodule BookApp.Mixfile do
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     aliases: aliases,
-     deps: deps]
+     aliases: aliases(),
+     deps: deps()]
   end
 
   # Configuration for the OTP application.
@@ -18,7 +18,7 @@ defmodule BookApp.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {BookApp, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :comeonin]]
   end
 
@@ -30,17 +30,18 @@ defmodule BookApp.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.1.4"},
-     {:postgrex, ">= 0.0.0"},
-     {:phoenix_ecto, "~> 3.0.0-beta"},
-     {:phoenix_html, "~> 2.4"},
+    [{:phoenix, "~> 1.2.0"},
+     {:phoenix_pubsub, "~> 1.0"},
+     {:postgrex, "~> 0.13.3"},
+     {:phoenix_ecto, "~> 3.2.3"},
+     {:phoenix_html, "~> 2.9.3"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.9"},
-     {:cowboy, "~> 1.0"},
-     {:phoenix_haml, "~> 0.2.1"},
-     {:comeonin, "~> 2.3"},
-     {:mix_test_watch, "~> 0.2", only: :dev},
-     {:ex_machina, "~> 0.6.1", only: :test}]
+     {:gettext, "~> 0.13"},
+     {:cowboy, "~> 1.1.2"},
+     {:phoenix_haml, "~> 0.2"},
+     {:comeonin, "~> 3.2.0"},
+     {:mix_test_watch, "~> 0.4.1", only: :dev},
+     {:ex_machina, "~> 2.0.0", only: :test}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
@@ -51,6 +52,7 @@ defmodule BookApp.Mixfile do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"]]
+     "ecto.reset": ["ecto.drop", "ecto.setup"],
+     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end

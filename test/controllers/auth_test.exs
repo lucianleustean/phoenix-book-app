@@ -63,7 +63,7 @@ defmodule BookApp.AuthTest do
   end
 
   test "login with a valid email and pass", %{conn: conn} do
-    user = insert_user(username: "me", password: "secret")
+    user = insert_user(%{username: "me", password: "secret"})
     {:ok, conn} = Auth.login_by_username_and_pass(conn, "me", "secret", repo: Repo)
     assert conn.assigns.current_user.id == user.id
   end
@@ -74,7 +74,7 @@ defmodule BookApp.AuthTest do
   end
 
   test "login with password mismatch", %{conn: conn} do
-    _ = insert_user(username: "me", password: "secret")
+    _ = insert_user(%{username: "me", password: "secret"})
     assert {:error, :unauthorized, _conn} =
       Auth.login_by_username_and_pass(conn, "me", "wrong", repo: Repo)
   end

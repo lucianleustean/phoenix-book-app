@@ -5,7 +5,7 @@ defmodule BookApp.VideoViewTest do
   use BookApp.ConnCase
 
   setup %{conn: conn} do
-    videos = [create(:video, title: "dogs"), create(:video, title: "cats")]
+    videos = [insert(:video, title: "dogs"), insert(:video, title: "cats")]
     {:ok, conn: conn, videos: videos}
   end
 
